@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+#root,
+html {
+  background-color: fffff;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.App {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  color: white;
+}
+.MuiInputBase-input {
+  font-size: 20px !important;
+}
+.MuiFormLabel-root {
+  font-size: 20px !important;
+}
