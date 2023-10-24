@@ -13,10 +13,10 @@ function Home() {
       <Card
         sx={{
           width: "100%",
-          maxWidth: "1200px",
+          maxWidth: "800px",
           borderRadius: "8px",
           marginTop: "10px",
-          padding: "20px",
+          padding: "10px 20px",
         }}
       >
         <BasicTabs />

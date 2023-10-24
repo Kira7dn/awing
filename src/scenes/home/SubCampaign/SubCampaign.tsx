@@ -28,6 +28,10 @@ const SubCampaign = () => {
             variant="standard"
             defaultValue="Chiến dịch con 1"
             fullWidth
+            sx={{
+              "& .MuiFormLabel-root": { fontSize: 15 },
+              "& .MuiInputBase-input": { fontSize: 16 },
+            }}
           />
           <FormControlLabel
             control={<Checkbox defaultChecked />}
