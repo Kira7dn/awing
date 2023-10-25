@@ -16,7 +16,7 @@ function Home() {
           maxWidth: "800px",
           borderRadius: "8px",
           marginTop: "10px",
-          padding: "10px 20px",
+          padding: "4px 20px",
         }}
       >
         <BasicTabs />

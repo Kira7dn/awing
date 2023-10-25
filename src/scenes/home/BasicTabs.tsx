@@ -3,9 +3,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import SubCampaign from "./SubCampaign/SubCampaigns";
+import SubCampaign from "./SubCampaign/SubTab";
 import { initialCampaign } from "../../store/reducer";
-import Information from "./Campain/Information";
+import Information from "./Campain/InfoTab";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -23,7 +23,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ p: 1 }}>{children}</Box>}
     </div>
   );
 }
@@ -49,13 +49,14 @@ export default function BasicTabs() {
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          sx={{ padding: "2px", height: "14px" }}
         >
           <Tab
-            label={<Typography variant="h3">THÔNG TIN</Typography>}
+            label={<Typography variant="h4">THÔNG TIN</Typography>}
             {...a11yProps(0)}
           />
           <Tab
-            label={<Typography variant="h3">CHIẾN DỊCH CON</Typography>}
+            label={<Typography variant="h4">CHIẾN DỊCH CON</Typography>}
             {...a11yProps(1)}
           />
         </Tabs>

@@ -29,7 +29,6 @@ export default function SubCampaignItem({ sub }: { sub: SubCampaign }) {
             required
             label="Tên chiến dịch con"
             variant="standard"
-            defaultValue="Chiến dịch con 1"
             fullWidth
             sx={{
               "& .MuiFormLabel-root": { fontSize: 15 },

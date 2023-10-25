@@ -6,7 +6,7 @@ import React, { useState } from "react";
 type Props = {
   information: Information;
 };
-function Information({ information }: Props) {
+function InfoTab({ information }: Props) {
   const [info, setInfo] = useState(information);
   return (
     <>
@@ -39,4 +39,4 @@ function Information({ information }: Props) {
   );
 }
 
-export default Information;
+export default InfoTab;
