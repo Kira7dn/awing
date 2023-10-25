@@ -2,11 +2,11 @@ export type Campaign = {
   information: Information;
   subCampaigns: [SubCampaign];
 };
-type Information = {
+export type Information = {
   name: string;
   describe?: string;
 };
-type SubCampaign = {
+export type SubCampaign = {
   id: number;
   name: string;
   status: boolean;
@@ -39,7 +39,7 @@ export const initialCampaign: Campaign = {
   ],
 };
 
-type CampaignAction = {
+export type CampaignAction = {
   type: string;
   payload?: Information | SubCampaign;
 };
@@ -59,15 +59,6 @@ export const campaignReducer = (
       return {
         ...state,
         subCampaigns: [...state.subCampaigns, action.payload],
-      };
-    case "UPDATE_SUB_CAMPAIGN_BY_ID":
-      return {
-        subCampaigns: state.subCampaigns.map((subCampaign) => {
-          if (subCampaign.id === action.payload?.id) {
-            return action.payload;
-          }
-          return subCampaign;
-        }),
       };
     default:
       return state;

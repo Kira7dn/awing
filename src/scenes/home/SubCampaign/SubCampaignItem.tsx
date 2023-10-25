@@ -6,8 +6,11 @@ import {
   TextField,
 } from "@mui/material";
 import AdvertiseList from "./AdvertiseList";
+import { SubCampaign } from "../../../store/reducer";
+import { useState } from "react";
 
-const SubCampaign = () => {
+export default function SubCampaignItem({ sub }: { sub: SubCampaign }) {
+  const [subCampaign, setSubCampaign] = useState(sub);
   return (
     <>
       <FormGroup>
@@ -32,9 +35,23 @@ const SubCampaign = () => {
               "& .MuiFormLabel-root": { fontSize: 15 },
               "& .MuiInputBase-input": { fontSize: 16 },
             }}
+            value={subCampaign.name}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setSubCampaign({ ...subCampaign, name: event.target.value });
+            }}
           />
           <FormControlLabel
-            control={<Checkbox defaultChecked />}
+            control={
+              <Checkbox
+                checked={subCampaign.status}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setSubCampaign({
+                    ...subCampaign,
+                    status: event.target.checked,
+                  });
+                }}
+              />
+            }
             label="Đang hoạt động"
             sx={{ "& .MuiSvgIcon-root": { fontSize: 28 }, width: "30%" }}
           />
@@ -43,6 +60,4 @@ const SubCampaign = () => {
       <AdvertiseList />
     </>
   );
-};
-
-export default SubCampaign;
+}

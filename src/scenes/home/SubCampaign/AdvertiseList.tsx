@@ -49,7 +49,7 @@ function AdvertiseList() {
     setAds(newAds);
     setSelected([]);
   };
-  const handleClick = (_event: React.MouseEvent<unknown>, id: number) => {
+  const handleCheck = (_event: React.MouseEvent<unknown>, id: number) => {
     const selectedIndex = selected.indexOf(id);
     let newSelected: number[] = [];
 
@@ -147,11 +147,16 @@ function AdvertiseList() {
               {ads.map((row) => {
                 const isItemSelected = isSelected(row.id);
                 return (
-                  <AdsRow
-                    row={row}
-                    isItemSelected={isItemSelected}
-                    handleClick={handleClick}
-                  />
+                  <TableRow
+                    key={row.name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <AdsRow
+                      row={row}
+                      isItemSelected={isItemSelected}
+                      handleCheck={handleCheck}
+                    />
+                  </TableRow>
                 );
               })}
             </TableBody>
