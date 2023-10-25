@@ -18,13 +18,17 @@ import { AddCircleOutline, Delete } from "@mui/icons-material";
 import { useState } from "react";
 import { AdsRow } from "./AdsRow";
 
-const adsProps = [
-  { id: 1, name: "Quảng cáo 1", quantity: 1 },
-  { id: 2, name: "Quảng cáo 2", quantity: 1 },
-  { id: 3, name: "Quảng cáo 3", quantity: 1 },
-  { id: 4, name: "Quảng cáo 4", quantity: 1 },
-];
-function AdvertiseList() {
+type Props = {
+  adsProps: {
+    id: number;
+    name: string;
+    quantity: number;
+  }[];
+  subId: number;
+};
+function AdvertiseList({ adsProps, subId }: Props) {
+  console.log(subId);
+
   const [ads, setAds] = useState(adsProps);
   const [selected, setSelected] = useState<number[]>([]);
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +41,10 @@ function AdvertiseList() {
   };
   const handleAdd = () => {
     const newAds = [...ads];
+    const index = newAds.length > 0 ? newAds[newAds.length - 1].id : 0;
     newAds.push({
-      id: newAds[newAds.length - 1].id + 1,
-      name: `Quảng cáo ${newAds[newAds.length - 1].id + 1}`,
+      id: index + 1,
+      name: `Quảng cáo ${index + 1}`,
       quantity: 1,
     });
     setAds(newAds);
@@ -49,27 +54,27 @@ function AdvertiseList() {
     setAds(newAds);
     setSelected([]);
   };
-  const handleClick = (_event: React.MouseEvent<unknown>, id: number) => {
+  const handleChangeAds = (id: number, name: string, quantity: number) => {
+    const newAds = [...ads];
+    const index = newAds.findIndex((n) => n.id === id);
+    newAds[index].name = name;
+    newAds[index].quantity = quantity;
+    setAds(newAds);
+  };
+  const handleCheck = (_event: React.MouseEvent<unknown>, id: number) => {
     const selectedIndex = selected.indexOf(id);
     let newSelected: number[] = [];
-
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
+    } else {
+      newSelected = selected.filter((n) => n !== id);
     }
     setSelected(newSelected);
   };
   function isSelected(id: number) {
     return selected.indexOf(id) !== -1;
   }
+
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", pb: 2, overflow: "hidden" }}>
@@ -87,17 +92,11 @@ function AdvertiseList() {
               sx={{ flex: "1 1 100%", fontSize: "20px" }}
               color="inherit"
               variant="subtitle1"
-              component="div"
             >
               {selected.length} selected
             </Typography>
           ) : (
-            <Typography
-              sx={{ flex: "1 1 100%" }}
-              variant="h3"
-              id="tableTitle"
-              component="div"
-            >
+            <Typography sx={{ flex: "1 1 100%" }} variant="h3" id="tableTitle">
               DANH SÁCH QUẢNG CÁO
             </Typography>
           )}
@@ -147,11 +146,17 @@ function AdvertiseList() {
               {ads.map((row) => {
                 const isItemSelected = isSelected(row.id);
                 return (
-                  <AdsRow
-                    row={row}
-                    isItemSelected={isItemSelected}
-                    handleClick={handleClick}
-                  />
+                  <TableRow
+                    key={row.name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <AdsRow
+                      row={row}
+                      isItemSelected={isItemSelected}
+                      handleCheck={handleCheck}
+                      handleChangeAds={handleChangeAds}
+                    />
+                  </TableRow>
                 );
               })}
             </TableBody>

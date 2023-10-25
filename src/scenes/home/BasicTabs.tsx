@@ -3,8 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Campaign from "../scenes/home/Campain/Campaign";
-import SubCampaign from "../scenes/home/SubCampaign/SubCampaign";
+import Campaign from "./Campain/Campaign";
+import SubCampaign from "./SubCampaign/SubCampaign";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -23,11 +23,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }

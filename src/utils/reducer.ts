@@ -2,11 +2,11 @@ export type Campaign = {
   information: Information;
   subCampaigns: [SubCampaign];
 };
-type Information = {
+export type Information = {
   name: string;
   describe?: string;
 };
-type SubCampaign = {
+export type SubCampaign = {
   id: number;
   name: string;
   status: boolean;

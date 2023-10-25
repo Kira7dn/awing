@@ -1,4 +1,4 @@
-import { Checkbox, TableCell, TableRow, TextField } from "@mui/material";
+import { Checkbox, TableCell, TextField } from "@mui/material";
 import { useState } from "react";
 
 type Props = {
@@ -7,22 +7,25 @@ type Props = {
     name: string;
     quantity: number;
   };
-  handleClick: (_event: React.MouseEvent<unknown>, id: number) => void;
+  handleCheck: (_event: React.MouseEvent<unknown>, id: number) => void;
+  handleChangeAds: (id: number, name: string, quantity: number) => void;
   isItemSelected: boolean;
 };
-export function AdsRow({ row, handleClick, isItemSelected }: Props) {
+export function AdsRow({
+  row,
+  handleCheck,
+  handleChangeAds,
+  isItemSelected,
+}: Props) {
   const [adsContent, setAdsContent] = useState(row.name);
   const [adsQuantity, setAdsQuantity] = useState(row.quantity);
   return (
-    <TableRow
-      key={row.name}
-      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-    >
+    <>
       <TableCell padding="checkbox">
         <Checkbox
           color="primary"
           checked={isItemSelected}
-          onClick={(event) => handleClick(event, row.id)}
+          onClick={(event) => handleCheck(event, row.id)}
         />
       </TableCell>
 
@@ -30,6 +33,8 @@ export function AdsRow({ row, handleClick, isItemSelected }: Props) {
         <TextField
           required
           variant="standard"
+          id={row.id.toString()}
+          name="ads-content"
           sx={{
             "& .MuiInputBase-input": { fontSize: 16 },
           }}
@@ -37,6 +42,7 @@ export function AdsRow({ row, handleClick, isItemSelected }: Props) {
           value={adsContent}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setAdsContent(event.target.value);
+            handleChangeAds(row.id, event.target.value, adsQuantity);
           }}
         />
       </TableCell>
@@ -46,11 +52,14 @@ export function AdsRow({ row, handleClick, isItemSelected }: Props) {
           variant="standard"
           value={adsQuantity}
           type="number"
+          name="ads-quantity"
+          id={row.id.toString()}
           InputLabelProps={{
             shrink: true,
           }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setAdsQuantity(event.target.value);
+            setAdsQuantity(Number(event.target.value));
+            handleChangeAds(row.id, adsContent, Number(event.target.value));
           }}
           sx={{
             "& .MuiInputBase-input": { fontSize: 16 },
@@ -58,6 +67,6 @@ export function AdsRow({ row, handleClick, isItemSelected }: Props) {
           fullWidth
         />
       </TableCell>
-    </TableRow>
+    </>
   );
 }

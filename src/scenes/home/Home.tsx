@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardActions } from "@mui/material";
-import BasicTabs from "../../components/BasicTabs";
+import BasicTabs from "./BasicTabs";
 
 function Home() {
   return (

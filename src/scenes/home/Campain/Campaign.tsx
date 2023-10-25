@@ -1,22 +1,13 @@
-import { FormControl } from "@mui/material";
+import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
 function Campaign() {
   return (
     <>
-      <FormControl
-        fullWidth
-        sx={{ m: 1, display: "flex", gap: 2 }}
-        variant="filled"
-      >
-        <TextField
-          required
-          label="Tên chiến dịch"
-          variant="standard"
-          fullWidth
-        />
-        <TextField label="Mô tả" variant="standard" fullWidth />
-      </FormControl>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <TextField label="Tên chiến dịch" variant="standard" required />
+        <TextField label="Mô tả" variant="standard" />
+      </Box>
     </>
   );
 }
