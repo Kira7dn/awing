@@ -44,6 +44,10 @@ export function AdsRow({
             setAdsContent(event.target.value);
             handleChangeAds(row.id, event.target.value, adsQuantity);
           }}
+          inputProps={{
+            onBlur: (event: React.FocusEvent<HTMLInputElement>) =>
+              console.log(event.target.value),
+          }}
         />
       </TableCell>
       <TableCell align="center" size="small">
@@ -60,6 +64,10 @@ export function AdsRow({
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setAdsQuantity(Number(event.target.value));
             handleChangeAds(row.id, adsContent, Number(event.target.value));
+          }}
+          inputProps={{
+            onBlur: (event: React.FocusEvent<HTMLInputElement>) =>
+              console.log(event.target.value),
           }}
           sx={{
             "& .MuiInputBase-input": { fontSize: 16 },

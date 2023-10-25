@@ -16,7 +16,6 @@ type Props = {
 const SubInfo = ({ nameProps, statusProps }: Props) => {
   const [name, setName] = useState(nameProps);
   const [status, setStatus] = useState(statusProps);
-  console.log(name, status);
 
   return (
     <FormGroup>
