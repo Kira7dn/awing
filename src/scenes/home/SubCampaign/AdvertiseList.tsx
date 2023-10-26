@@ -17,19 +17,15 @@ import {
 import { AddCircleOutline, Delete } from "@mui/icons-material";
 import { useState } from "react";
 import { AdsRow } from "./AdsRow";
+import { useStore } from "../../../store/hook";
+import { UPDATE_SUB_CAMPAIGN } from "../../../store/action";
 
-type Props = {
-  adsProps: {
-    id: number;
-    name: string;
-    quantity: number;
-  }[];
-  subId: number;
-};
-function AdvertiseList({ adsProps, subId }: Props) {
-  console.log(subId);
+function AdvertiseList() {
+  const { state, dispatch } = useStore();
+  const { subCampaigns, status } = state;
+  const subCampaign = subCampaigns.filter((c) => c.id === status.currentSub)[0];
+  const ads = subCampaign.ads;
 
-  const [ads, setAds] = useState(adsProps);
   const [selected, setSelected] = useState<number[]>([]);
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -47,19 +43,43 @@ function AdvertiseList({ adsProps, subId }: Props) {
       name: `Quảng cáo ${index + 1}`,
       quantity: 1,
     });
-    setAds(newAds);
+    dispatch({
+      type: UPDATE_SUB_CAMPAIGN,
+      payload: {
+        ...subCampaign,
+        ads: newAds,
+      },
+    });
   };
   const handleDelete = () => {
     const newAds = ads.filter((n) => !selected.includes(n.id));
-    setAds(newAds);
+    dispatch({
+      type: UPDATE_SUB_CAMPAIGN,
+      payload: {
+        ...subCampaign,
+        ads: newAds,
+      },
+    });
     setSelected([]);
   };
-  const handleChangeAds = (id: number, name: string, quantity: number) => {
-    const newAds = [...ads];
-    const index = newAds.findIndex((n) => n.id === id);
-    newAds[index].name = name;
-    newAds[index].quantity = quantity;
-    setAds(newAds);
+
+  const handleChangeAds = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newAds = subCampaign.ads.map((ad) => {
+      if (ad.id === Number(event.target.id)) {
+        return {
+          ...ad,
+          [event.target.name]: event.target.value,
+        };
+      }
+      return ad;
+    });
+    dispatch({
+      type: UPDATE_SUB_CAMPAIGN,
+      payload: {
+        ...subCampaign,
+        ads: newAds,
+      },
+    });
   };
   const handleCheck = (_event: React.MouseEvent<unknown>, id: number) => {
     const selectedIndex = selected.indexOf(id);

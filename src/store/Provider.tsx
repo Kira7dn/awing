@@ -6,7 +6,12 @@ import {
   validateReducer,
 } from "./reducer";
 import Context from "./Context";
-import { Campaign, CampaignActions, SubCampaignActions } from "./interface";
+import {
+  Campaign,
+  InfoAction,
+  StatusAction,
+  SubCampaignActions,
+} from "./interface";
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -16,12 +21,12 @@ export const APP_STATE_NAME = "testing";
 
 function StoreProvider({ children }: ProviderProps) {
   const combinedReducers = (
-    { information, subCampaigns, isValid }: Campaign,
-    action: CampaignActions | SubCampaignActions
+    { information, subCampaigns, status }: Campaign,
+    action: InfoAction | SubCampaignActions | StatusAction
   ) => ({
     information: infoReducer(information, action),
     subCampaigns: subReducer(subCampaigns, action),
-    isValid: validateReducer(isValid, action),
+    status: validateReducer(status, action),
   });
 
   const [state, dispatch] = useReducer(combinedReducers, initialState);

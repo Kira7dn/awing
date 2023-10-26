@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Campaign from "./Campain/Campaign";
 import SubCampaign from "./SubCampaign/SubCampaign";
-import { initialCampaign } from "../../utils/reducer";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -15,7 +14,6 @@ interface TabPanelProps {
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -36,10 +34,8 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
+export default function CampaignTabs() {
   const [value, setValue] = React.useState(0);
-  const { information, subCampaigns } = initialCampaign;
-
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -63,10 +59,10 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <Campaign information={information} />
+        <Campaign />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <SubCampaign subCampaigns={subCampaigns} />
+        <SubCampaign />
       </CustomTabPanel>
     </Box>
   );

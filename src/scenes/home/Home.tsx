@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardActions } from "@mui/material";
-import BasicTabs from "./BasicTabs";
+import BasicTabs from "./CampaignTabs";
 
 function Home() {
   return (

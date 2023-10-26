@@ -2,13 +2,20 @@ import { APP_STATE_NAME } from "./Provider";
 import {
   // ADD_ADS,
   ADD_SUB_CAMPAIGN,
+  SET_CURRENT_SUB,
   // DELETE_ADS,
   SET_IS_VALID,
   // UPDATE_ADS,
   UPDATE_CAMPAIGN,
   UPDATE_SUB_CAMPAIGN,
 } from "./action";
-import { Campaign, Information, StateActions, ISubCampaign } from "./interface";
+import {
+  Campaign,
+  Information,
+  StateActions,
+  ISubCampaign,
+  Status,
+} from "./interface";
 
 export const initialState: Campaign = JSON.parse(
   localStorage.getItem(APP_STATE_NAME)!
@@ -33,7 +40,10 @@ export const initialState: Campaign = JSON.parse(
           ],
         },
       ],
-      isValid: true,
+      status: {
+        isValid: true,
+        currentSub: 1,
+      },
     };
 
 export const subReducer = (subs: ISubCampaign[], action: StateActions) => {
@@ -44,11 +54,7 @@ export const subReducer = (subs: ISubCampaign[], action: StateActions) => {
     case UPDATE_SUB_CAMPAIGN:
       return subs.map((subCampaign) => {
         if (subCampaign.id === payload.id) {
-          return {
-            ...subCampaign,
-            status: payload.status,
-            name: payload.name,
-          };
+          return payload;
         }
         return subCampaign;
       });
@@ -110,12 +116,14 @@ export const infoReducer = (info: Information, action: StateActions) => {
   }
 };
 
-export const validateReducer = (isValid: boolean, action: StateActions) => {
+export const validateReducer = (status: Status, action: StateActions) => {
   const { type, payload } = action;
   switch (type) {
     case SET_IS_VALID:
-      return payload;
+      return { ...status, isValid: payload };
+    case SET_CURRENT_SUB:
+      return { ...status, currentSub: payload };
     default:
-      return isValid;
+      return status;
   }
 };

@@ -1,5 +1,4 @@
 import { Checkbox, TableCell, TextField } from "@mui/material";
-import { useState } from "react";
 
 type Props = {
   row: {
@@ -7,18 +6,18 @@ type Props = {
     name: string;
     quantity: number;
   };
-  handleCheck: (_event: React.MouseEvent<unknown>, id: number) => void;
-  handleChangeAds: (id: number, name: string, quantity: number) => void;
   isItemSelected: boolean;
+  handleCheck: (_event: React.MouseEvent<unknown>, id: number) => void;
+  handleChangeAds: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 export function AdsRow({
   row,
+  isItemSelected,
   handleCheck,
   handleChangeAds,
-  isItemSelected,
 }: Props) {
-  const [adsContent, setAdsContent] = useState(row.name);
-  const [adsQuantity, setAdsQuantity] = useState(row.quantity);
+  // const [name, setName] = useState(row.name);
+  // const [quantity, setQuantity] = useState(row.quantity);
   return (
     <>
       <TableCell padding="checkbox">
@@ -34,19 +33,17 @@ export function AdsRow({
           required
           variant="standard"
           id={row.id.toString()}
-          name="ads-content"
+          name="name"
+          defaultValue={row.name}
+          error
+          helperText="Vui lòng điền thông tin."
           sx={{
             "& .MuiInputBase-input": { fontSize: 16 },
           }}
           fullWidth
-          value={adsContent}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setAdsContent(event.target.value);
-            handleChangeAds(row.id, event.target.value, adsQuantity);
-          }}
           inputProps={{
             onBlur: (event: React.FocusEvent<HTMLInputElement>) =>
-              console.log(event.target.value),
+              handleChangeAds(event),
           }}
         />
       </TableCell>
@@ -54,20 +51,14 @@ export function AdsRow({
         <TextField
           required
           variant="standard"
-          value={adsQuantity}
           type="number"
-          name="ads-quantity"
           id={row.id.toString()}
-          InputLabelProps={{
-            shrink: true,
-          }}
+          name="quantity"
+          error
+          helperText="Vui lòng nhập số lượng."
+          value={row.quantity}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setAdsQuantity(Number(event.target.value));
-            handleChangeAds(row.id, adsContent, Number(event.target.value));
-          }}
-          inputProps={{
-            onBlur: (event: React.FocusEvent<HTMLInputElement>) =>
-              console.log(event.target.value),
+            handleChangeAds(event);
           }}
           sx={{
             "& .MuiInputBase-input": { fontSize: 16 },

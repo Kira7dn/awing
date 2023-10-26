@@ -5,18 +5,26 @@ import {
   FormGroup,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useStore } from "../../../store/hook";
+import { UPDATE_SUB_CAMPAIGN } from "../../../store/action";
 
-type Props = {
-  id?: number;
-  nameProps: string;
-  statusProps: boolean;
-};
-
-const SubInfo = ({ nameProps, statusProps }: Props) => {
-  const [name, setName] = useState(nameProps);
-  const [status, setStatus] = useState(statusProps);
-
+const SubInfo = () => {
+  const { state, dispatch } = useStore();
+  const { subCampaigns, status } = state;
+  const subCampaign = subCampaigns.filter((c) => c.id === status.currentSub)[0];
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedSub = {
+      ...subCampaign,
+      [event.target.name]:
+        event.target.name === "status"
+          ? !subCampaign.status
+          : event.target.value,
+    };
+    dispatch({
+      type: UPDATE_SUB_CAMPAIGN,
+      payload: updatedSub,
+    });
+  };
   return (
     <FormGroup>
       <FormControl
@@ -34,10 +42,11 @@ const SubInfo = ({ nameProps, statusProps }: Props) => {
           required
           label="Tên chiến dịch con"
           variant="standard"
-          value={name}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setName(event.target.value);
-          }}
+          value={subCampaign.name}
+          name="name"
+          error
+          helperText="Vui lòng điền thông tin."
+          onChange={handleChange}
           fullWidth
           sx={{
             "& .MuiFormLabel-root": { fontSize: 15 },
@@ -47,10 +56,9 @@ const SubInfo = ({ nameProps, statusProps }: Props) => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={status}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setStatus(event.target.checked);
-              }}
+              checked={subCampaign.status}
+              onChange={handleChange}
+              name="status"
             />
           }
           label="Đang hoạt động"

@@ -5,6 +5,7 @@ import {
   ADD_ADS,
   ADD_SUB_CAMPAIGN,
   DELETE_ADS,
+  SET_CURRENT_SUB,
   SET_IS_VALID,
   UPDATE_ADS,
   UPDATE_CAMPAIGN,
@@ -14,9 +15,12 @@ import {
 export type Campaign = {
   information: Information;
   subCampaigns: ISubCampaign[];
-  isValid: boolean;
+  status: Status;
 };
-
+export type Status = {
+  isValid: boolean;
+  currentSub: number;
+};
 export type Information = {
   name: string;
   describe?: string;
@@ -71,7 +75,7 @@ export type ISubUpdate = {
 
 export type SubCampaignActions = ISubAdd | ISubUpdate;
 
-export type ICampaignUpdate = {
+export type InfoAction = {
   type: typeof UPDATE_CAMPAIGN;
   payload: Information;
 };
@@ -80,6 +84,12 @@ export type ICampaignValidate = {
   type: typeof SET_IS_VALID;
   payload: boolean;
 };
-export type CampaignActions = ICampaignUpdate | ICampaignValidate;
 
-export type StateActions = SubCampaignActions | CampaignActions;
+export type ISubCurrent = {
+  type: typeof SET_CURRENT_SUB;
+  payload: number;
+};
+
+export type StatusAction = ICampaignValidate | ISubCurrent;
+
+export type StateActions = SubCampaignActions | InfoAction | StatusAction;

@@ -11,7 +11,8 @@ const ADD_ADS = "ADD_ADS";
 const UPDATE_ADS = "UPDATE_ADS";
 const DELETE_ADS = "DELETE_ADS";
 
-export const SET_IS_VALID = "SET_IS_VALID";
+const SET_IS_VALID = "SET_IS_VALID";
+const SET_CURRENT_SUB = "SET_CURRENT_SUB";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export default Object.freeze({
@@ -21,6 +22,8 @@ export default Object.freeze({
   ADD_ADS,
   UPDATE_ADS,
   DELETE_ADS,
+  SET_IS_VALID,
+  SET_CURRENT_SUB,
 });
 // eslint-disable-next-line react-refresh/only-export-components
 export {
@@ -30,4 +33,6 @@ export {
   ADD_ADS,
   UPDATE_ADS,
   DELETE_ADS,
+  SET_IS_VALID,
+  SET_CURRENT_SUB,
 };
