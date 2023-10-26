@@ -1,7 +1,37 @@
 import { Box, Button, Card, CardActions } from "@mui/material";
 import BasicTabs from "./CampaignTabs";
+import { useStore } from "../../store/hook";
+import { SET_IS_VALID } from "../../store/action";
+// import { UPDATE_INFOMATION, UPDATE_SUB_CAMPAIGN } from "../../store/action";
+// import { Campaign } from "../../store/interface";
 
 function Home() {
+  const { state, dispatch } = useStore();
+
+  const handleSubmit = () => {
+    let result = true;
+    if (state.information.error) {
+      result = false;
+    }
+    for (const subCampaign of state.subCampaigns) {
+      if (subCampaign.error_name || subCampaign.error_ads) {
+        result = false;
+      }
+    }
+    if (!result) {
+      alert("Vui lòng điền đúng và đầy đủ thông tin");
+      dispatch({
+        type: SET_IS_VALID,
+        payload: result,
+      });
+    } else {
+      alert(`Submit successful with \n ${JSON.stringify(state)}`);
+      dispatch({
+        type: SET_IS_VALID,
+        payload: true,
+      });
+    }
+  };
   return (
     <Box
       sx={{
@@ -21,7 +51,12 @@ function Home() {
       >
         <BasicTabs />
         <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-          <Button size="large" color="primary" variant="contained">
+          <Button
+            size="large"
+            color="primary"
+            variant="contained"
+            onClick={handleSubmit}
+          >
             SUBMIT
           </Button>
         </CardActions>

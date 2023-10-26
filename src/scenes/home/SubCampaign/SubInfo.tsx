@@ -19,6 +19,7 @@ const SubInfo = () => {
         event.target.name === "status"
           ? !subCampaign.status
           : event.target.value,
+      error_name: event.target.value === "" ? "Vui lòng điền thông tin." : null,
     };
     dispatch({
       type: UPDATE_SUB_CAMPAIGN,
@@ -44,8 +45,8 @@ const SubInfo = () => {
           variant="standard"
           value={subCampaign.name}
           name="name"
-          error
-          helperText="Vui lòng điền thông tin."
+          error={!state.status.isValid && !!subCampaign.error_name}
+          // helperText={subCampaign.error_name}
           onChange={handleChange}
           fullWidth
           sx={{

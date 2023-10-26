@@ -1,6 +1,7 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import { ISubCampaign } from "../../../store/interface";
 import { CheckCircle } from "@mui/icons-material";
+import { useStore } from "../../../store/hook";
 
 type Props = {
   subCampaign: ISubCampaign;
@@ -8,6 +9,7 @@ type Props = {
 };
 
 const SubCampaignCard = ({ subCampaign, isSelected }: Props) => {
+  const { state } = useStore();
   const adsNumber = subCampaign.ads.reduce(
     (sum, ad) => sum + Number(ad.quantity),
     0
@@ -32,6 +34,12 @@ const SubCampaignCard = ({ subCampaign, isSelected }: Props) => {
           <Typography
             variant="h3"
             gutterBottom
+            color={
+              (subCampaign.error_ads || subCampaign.error_name) &&
+              !state.status.isValid
+                ? "error"
+                : "text.primary"
+            }
             sx={{
               display: "-webkit-box",
               WebkitLineClamp: "1",

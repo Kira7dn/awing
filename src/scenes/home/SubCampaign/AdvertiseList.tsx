@@ -27,12 +27,15 @@ function AdvertiseList() {
   const ads = subCampaign.ads;
 
   const [selected, setSelected] = useState<number[]>([]);
+  const [checkAll, setCheckAll] = useState<boolean>(false);
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelected = ads.map((n) => n.id);
       setSelected(newSelected);
+      setCheckAll(true);
       return;
     }
+    setCheckAll(false);
     setSelected([]);
   };
   const handleAdd = () => {
@@ -41,7 +44,7 @@ function AdvertiseList() {
     newAds.push({
       id: index + 1,
       name: `Quảng cáo ${index + 1}`,
-      quantity: 1,
+      quantity: 0,
     });
     dispatch({
       type: UPDATE_SUB_CAMPAIGN,
@@ -58,17 +61,31 @@ function AdvertiseList() {
       payload: {
         ...subCampaign,
         ads: newAds,
+        error_ads: newAds.length === 0 ? "Lỗi Quảng cáo" : null,
       },
     });
     setSelected([]);
+    setCheckAll(false);
   };
 
   const handleChangeAds = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const error = {
+      error_name:
+        event.target.name === "name" && event.target.value === ""
+          ? "Vui lòng điền thông tin."
+          : null,
+      error_quantity:
+        event.target.name === "quantity" && Number(event.target.value) <= 0
+          ? "Vui lòng điền thông tin."
+          : null,
+    };
+
     const newAds = subCampaign.ads.map((ad) => {
       if (ad.id === Number(event.target.id)) {
         return {
           ...ad,
           [event.target.name]: event.target.value,
+          ...error,
         };
       }
       return ad;
@@ -78,6 +95,8 @@ function AdvertiseList() {
       payload: {
         ...subCampaign,
         ads: newAds,
+        error_ads:
+          error.error_name || error.error_quantity ? "Lỗi Quảng cáo" : null,
       },
     });
   };
@@ -116,7 +135,11 @@ function AdvertiseList() {
               {selected.length} selected
             </Typography>
           ) : (
-            <Typography sx={{ flex: "1 1 100%" }} variant="h3" id="tableTitle">
+            <Typography
+              sx={{ flex: "1 1 100%", fontSize: "16px", fontWeight: 600 }}
+              variant="h4"
+              id="tableTitle"
+            >
               DANH SÁCH QUẢNG CÁO
             </Typography>
           )}
@@ -146,17 +169,24 @@ function AdvertiseList() {
                 <TableCell padding="checkbox">
                   <Checkbox
                     color="primary"
+                    checked={checkAll}
                     onChange={handleSelectAllClick}
                     sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
                   />
                 </TableCell>
                 <TableCell>
-                  <Typography variant="h4" sx={{ fontSize: "18px" }}>
+                  <Typography
+                    variant="h5"
+                    sx={{ fontSize: "16px", fontWeight: 600 }}
+                  >
                     Tên quảng cáo*
                   </Typography>
                 </TableCell>
                 <TableCell width="20%">
-                  <Typography variant="h4" sx={{ fontSize: "18px" }}>
+                  <Typography
+                    variant="h5"
+                    sx={{ fontSize: "16px", fontWeight: 600 }}
+                  >
                     Số lượng*
                   </Typography>
                 </TableCell>

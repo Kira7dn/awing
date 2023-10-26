@@ -6,7 +6,7 @@ import {
   // DELETE_ADS,
   SET_IS_VALID,
   // UPDATE_ADS,
-  UPDATE_CAMPAIGN,
+  UPDATE_INFOMATION,
   UPDATE_SUB_CAMPAIGN,
 } from "./action";
 import {
@@ -105,12 +105,8 @@ export const subReducer = (subs: ISubCampaign[], action: StateActions) => {
 export const infoReducer = (info: Information, action: StateActions) => {
   const { type, payload } = action;
   switch (type) {
-    case UPDATE_CAMPAIGN:
-      return {
-        ...info,
-        name: payload.name,
-        describe: payload.describe,
-      };
+    case UPDATE_INFOMATION:
+      return payload;
     default:
       return info;
   }

@@ -1,4 +1,5 @@
 import { Checkbox, TableCell, TextField } from "@mui/material";
+import { useStore } from "../../../store/hook";
 
 type Props = {
   row: {
@@ -18,6 +19,7 @@ export function AdsRow({
 }: Props) {
   // const [name, setName] = useState(row.name);
   // const [quantity, setQuantity] = useState(row.quantity);
+  const { state } = useStore();
   return (
     <>
       <TableCell padding="checkbox">
@@ -35,8 +37,12 @@ export function AdsRow({
           id={row.id.toString()}
           name="name"
           defaultValue={row.name}
-          error
-          helperText="Vui lòng điền thông tin."
+          error={!state.status.isValid && row.name === ""}
+          // helperText={
+          //   !state.status.isValid &&
+          //   row.name === "" &&
+          //   "Vui lòng điền thông tin."
+          // }
           sx={{
             "& .MuiInputBase-input": { fontSize: 16 },
           }}
@@ -54,8 +60,12 @@ export function AdsRow({
           type="number"
           id={row.id.toString()}
           name="quantity"
-          error
-          helperText="Vui lòng nhập số lượng."
+          error={!state.status.isValid && row.quantity <= 0}
+          // helperText={
+          //   !state.status.isValid &&
+          //   row.quantity <= 0 &&
+          //   "Vui lòng điền số lượng."
+          // }
           value={row.quantity}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             handleChangeAds(event);

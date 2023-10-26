@@ -1,12 +1,11 @@
 import { FormControl } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useStore } from "../../../store/hook";
-import { SET_IS_VALID, UPDATE_CAMPAIGN } from "../../../store/action";
+import { UPDATE_INFOMATION } from "../../../store/action";
 
 function Campaign() {
   const { state, dispatch } = useStore();
   const { name, describe } = state.information;
-
   return (
     <>
       <FormControl
@@ -20,18 +19,18 @@ function Campaign() {
           variant="standard"
           fullWidth
           value={name}
-          error
-          helperText="Vui lòng điền thông tin."
+          error={!state.status.isValid && !!state.information.error}
+          // helperText={!state.status.isValid && state.information.error}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             dispatch({
-              type: UPDATE_CAMPAIGN,
-              payload: { name: event.target.value, describe },
+              type: UPDATE_INFOMATION,
+              payload: {
+                name: event.target.value,
+                describe,
+                error:
+                  event.target.value === "" ? "Vui lòng điền thông tin." : null,
+              },
             });
-            !state.status.isValid &&
-              dispatch({
-                type: SET_IS_VALID,
-                payload: event.target.value !== "",
-              });
           }}
           sx={{
             "& .MuiFormLabel-root": { fontSize: 15 },
@@ -45,7 +44,7 @@ function Campaign() {
           value={describe}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             dispatch({
-              type: UPDATE_CAMPAIGN,
+              type: UPDATE_INFOMATION,
               payload: { name, describe: event.target.value },
             })
           }

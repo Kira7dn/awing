@@ -6,7 +6,7 @@ import { useStore } from "../../../store/hook";
 import { ADD_SUB_CAMPAIGN, SET_CURRENT_SUB } from "../../../store/action";
 import { tokens } from "../../../theme";
 
-const SubCampaign = () => {
+const SubCampaigns = () => {
   const { state, dispatch } = useStore();
   const { subCampaigns, status } = state;
   const newSub = {
@@ -81,4 +81,4 @@ const SubCampaign = () => {
   );
 };
 
-export default SubCampaign;
+export default SubCampaigns;

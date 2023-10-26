@@ -4,7 +4,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Campaign from "./Campain/Campaign";
-import SubCampaign from "./SubCampaign/SubCampaign";
+import SubCampaign from "./SubCampaign/SubCampaigns";
 
 interface TabPanelProps {
   children?: React.ReactNode;

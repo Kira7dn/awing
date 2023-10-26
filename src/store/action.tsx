@@ -2,7 +2,7 @@
  * ActionTypes.tsx
  */
 
-const UPDATE_CAMPAIGN = "UPDATE_CAMPAIGN";
+const UPDATE_INFOMATION = "UPDATE_INFOMATION";
 
 const ADD_SUB_CAMPAIGN = "ADD_SUB_CAMPAIGN";
 const UPDATE_SUB_CAMPAIGN = "UPDATE_SUB_CAMPAIGN";
@@ -16,7 +16,7 @@ const SET_CURRENT_SUB = "SET_CURRENT_SUB";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export default Object.freeze({
-  UPDATE_CAMPAIGN,
+  UPDATE_INFOMATION,
   ADD_SUB_CAMPAIGN,
   UPDATE_SUB_CAMPAIGN,
   ADD_ADS,
@@ -27,7 +27,7 @@ export default Object.freeze({
 });
 // eslint-disable-next-line react-refresh/only-export-components
 export {
-  UPDATE_CAMPAIGN,
+  UPDATE_INFOMATION,
   ADD_SUB_CAMPAIGN,
   UPDATE_SUB_CAMPAIGN,
   ADD_ADS,

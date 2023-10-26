@@ -8,7 +8,7 @@ import {
   SET_CURRENT_SUB,
   SET_IS_VALID,
   UPDATE_ADS,
-  UPDATE_CAMPAIGN,
+  UPDATE_INFOMATION,
   UPDATE_SUB_CAMPAIGN,
 } from "./action";
 
@@ -24,12 +24,15 @@ export type Status = {
 export type Information = {
   name: string;
   describe?: string;
+  error?: string | null;
 };
 
 export type ISubCampaign = {
   id: number;
   name: string;
   status: boolean;
+  error_name?: string | null;
+  error_ads?: string | null;
   ads: Ads[];
 };
 
@@ -37,6 +40,8 @@ export type Ads = {
   id: number;
   name: string;
   quantity: number;
+  error_name?: string | null;
+  error_quantity?: string | null;
 };
 
 export type IAdsAdd = {
@@ -76,7 +81,7 @@ export type ISubUpdate = {
 export type SubCampaignActions = ISubAdd | ISubUpdate;
 
 export type InfoAction = {
-  type: typeof UPDATE_CAMPAIGN;
+  type: typeof UPDATE_INFOMATION;
   payload: Information;
 };
 
