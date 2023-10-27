@@ -37,6 +37,7 @@ function Home() {
         width: "100%",
         display: "flex",
         justifyContent: "center",
+        padding: "8px",
       }}
     >
       <Card
@@ -45,7 +46,9 @@ function Home() {
           maxWidth: "800px",
           borderRadius: "8px",
           marginTop: "10px",
-          padding: "10px 20px",
+          padding: "10px 8px",
+          border: "1px solid rgba(0,0,0,0.2)",
+          boxShadow: "2px 2px 2px 2px rgba(0,0,0,0.1)",
         }}
       >
         <MainTabs />

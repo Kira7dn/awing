@@ -4,6 +4,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   Box,
   Button,
@@ -14,6 +15,7 @@ import {
   Toolbar,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { AddCircleOutline, Delete } from "@mui/icons-material";
 
@@ -31,7 +33,7 @@ function AdsList() {
   const [checkAll, setCheckAll] = useState<boolean>(false);
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = ads.map((n) => n.id);
+      const newSelected = ads.map((ad) => ad.id);
       setSelected(newSelected);
       setCheckAll(true);
       return;
@@ -114,24 +116,24 @@ function AdsList() {
   function isSelected(id: number) {
     return selected.indexOf(id) !== -1;
   }
-
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", pb: 2, overflow: "hidden" }}>
         <Toolbar
+          variant="dense"
           sx={{
-            pl: { sm: 2 },
-            pr: { xs: 1, sm: 1 },
             ...(selected.length > 0 && {
               bgcolor: "rgba(0, 0, 0, 0.08)",
             }),
+            minHeight: 40,
           }}
         >
           {selected.length > 0 ? (
             <Typography
-              sx={{ flex: "1 1 100%", fontSize: "20px" }}
-              color="inherit"
-              variant="subtitle1"
+              sx={{ flex: "1 1 100%", fontSize: "16px" }}
+              variant="h4"
             >
               {selected.length} selected
             </Typography>
@@ -146,15 +148,17 @@ function AdsList() {
           )}
           {selected.length > 0 ? (
             <Tooltip title="Delete">
-              <IconButton size="large" onClick={handleDelete}>
+              <IconButton
+                size={matches ? "large" : "medium"}
+                onClick={handleDelete}
+              >
                 <Delete fontSize="inherit" />
               </IconButton>
             </Tooltip>
           ) : (
             <Button
               variant="outlined"
-              size="large"
-              sx={{ display: "flex", gap: 1 }}
+              size={matches ? "large" : "small"}
               onClick={handleAdd}
             >
               <AddCircleOutline />
@@ -163,8 +167,8 @@ function AdsList() {
           )}
         </Toolbar>
 
-        <TableContainer sx={{ maxHeight: 280 }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableContainer sx={{ maxHeight: { xs: "200px", md: "240" } }}>
+          <Table aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell padding="checkbox">
@@ -183,7 +187,7 @@ function AdsList() {
                     Tên quảng cáo*
                   </Typography>
                 </TableCell>
-                <TableCell width="20%">
+                <TableCell width="20%" sx={{ minWidth: "120px" }}>
                   <Typography
                     variant="h5"
                     sx={{ fontSize: "16px", fontWeight: 600 }}
@@ -194,20 +198,16 @@ function AdsList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {ads.map((row) => {
-                const isItemSelected = isSelected(row.id);
+              {ads.map((ad) => {
+                const isItemSelected = isSelected(ad.id);
                 return (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <AdsItem
-                      row={row}
-                      isItemSelected={isItemSelected}
-                      handleCheck={handleCheck}
-                      handleChangeAds={handleChangeAds}
-                    />
-                  </TableRow>
+                  <AdsItem
+                    key={ad.id}
+                    row={ad}
+                    isItemSelected={isItemSelected}
+                    handleCheck={handleCheck}
+                    handleChangeAds={handleChangeAds}
+                  />
                 );
               })}
             </TableBody>

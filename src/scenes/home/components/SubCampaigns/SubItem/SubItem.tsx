@@ -1,12 +1,13 @@
 import SubInfo from "./SubInfo";
-import AdvertiseList from "./Ads/AdsList";
+import AdsList from "./Ads/AdsList";
+import { Card } from "@mui/material";
 
 function SubItem() {
   return (
-    <>
+    <Card sx={{ marginTop: "4px" }}>
       <SubInfo />
-      <AdvertiseList />
-    </>
+      <AdsList />
+    </Card>
   );
 }
 

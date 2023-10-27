@@ -32,7 +32,7 @@ const SubCampaigns = () => {
           gap: "10px",
           overflowY: "hidden",
           "&::-webkit-scrollbar": {
-            height: { xs: "0", sm: "6px" },
+            height: "6px",
             backgroundColor: "#F5F5F5",
             overflowY: "hidden",
           },
@@ -53,6 +53,10 @@ const SubCampaigns = () => {
               dispatch({
                 type: ADD_SUB_CAMPAIGN,
                 payload: newSub,
+              });
+              dispatch({
+                type: SET_CURRENT_SUB,
+                payload: newSub.id,
               });
             }}
           >

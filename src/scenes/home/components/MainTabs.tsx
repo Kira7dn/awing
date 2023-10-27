@@ -50,11 +50,25 @@ export default function MainTabs() {
           aria-label="basic tabs example"
         >
           <Tab
-            label={<Typography variant="h3">THÔNG TIN</Typography>}
+            label={
+              <Typography
+                variant="h3"
+                sx={{ fontSize: { xs: "14px", md: "20px" } }}
+              >
+                THÔNG TIN
+              </Typography>
+            }
             {...a11yProps(0)}
           />
           <Tab
-            label={<Typography variant="h3">CHIẾN DỊCH CON</Typography>}
+            label={
+              <Typography
+                variant="h3"
+                sx={{ fontSize: { xs: "14px", md: "20px" } }}
+              >
+                CHIẾN DỊCH CON
+              </Typography>
+            }
             {...a11yProps(1)}
           />
         </Tabs>

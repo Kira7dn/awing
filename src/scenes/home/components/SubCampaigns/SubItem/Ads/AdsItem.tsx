@@ -1,4 +1,4 @@
-import { Checkbox, TableCell, TextField } from "@mui/material";
+import { Checkbox, TableCell, TableRow, TextField } from "@mui/material";
 
 import { useStore } from "@/store/hook";
 
@@ -18,11 +18,9 @@ export function AdsItem({
   handleCheck,
   handleChangeAds,
 }: Props) {
-  // const [name, setName] = useState(row.name);
-  // const [quantity, setQuantity] = useState(row.quantity);
   const { state } = useStore();
   return (
-    <>
+    <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell padding="checkbox">
         <Checkbox
           color="primary"
@@ -48,9 +46,8 @@ export function AdsItem({
             "& .MuiInputBase-input": { fontSize: 16 },
           }}
           fullWidth
-          inputProps={{
-            onBlur: (event: React.FocusEvent<HTMLInputElement>) =>
-              handleChangeAds(event),
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            handleChangeAds(event);
           }}
         />
       </TableCell>
@@ -77,6 +74,6 @@ export function AdsItem({
           fullWidth
         />
       </TableCell>
-    </>
+    </TableRow>
   );
 }

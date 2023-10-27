@@ -1,4 +1,4 @@
-import { FormControl } from "@mui/material";
+import { FormControl, FormGroup } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
 import { UPDATE_INFOMATION } from "@/store/action";
@@ -8,7 +8,7 @@ function Information() {
   const { state, dispatch } = useStore();
   const { name, describe } = state.information;
   return (
-    <>
+    <FormGroup>
       <FormControl
         fullWidth
         sx={{ m: 1, display: "flex", gap: 2 }}
@@ -23,6 +23,8 @@ function Information() {
           error={!state.status.isValid && !!state.information.error}
           // helperText={!state.status.isValid && state.information.error}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            console.log(event.target.value);
+
             dispatch({
               type: UPDATE_INFOMATION,
               payload: {
@@ -55,7 +57,7 @@ function Information() {
           }}
         />
       </FormControl>
-    </>
+    </FormGroup>
   );
 }
 

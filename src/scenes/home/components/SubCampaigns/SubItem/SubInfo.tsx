@@ -2,7 +2,6 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
-  FormGroup,
   TextField,
 } from "@mui/material";
 
@@ -28,46 +27,49 @@ const SubInfo = () => {
     });
   };
   return (
-    <FormGroup>
-      <FormControl
+    <FormControl
+      fullWidth
+      sx={{
+        padding: "8px",
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        justifyContent: "space-between",
+      }}
+      variant="filled"
+    >
+      <TextField
+        required
+        label="Tên chiến dịch con"
+        variant="standard"
+        value={subCampaign.name}
+        name="name"
+        error={!state.status.isValid && !!subCampaign.error_name}
+        // helperText={subCampaign.error_name}
+        onChange={handleChange}
         fullWidth
         sx={{
-          m: 1,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          gap: 4,
+          "& .MuiFormLabel-root": { fontSize: 15 },
+          "& .MuiInputBase-input": { fontSize: 16 },
         }}
-        variant="filled"
-      >
-        <TextField
-          required
-          label="Tên chiến dịch con"
-          variant="standard"
-          value={subCampaign.name}
-          name="name"
-          error={!state.status.isValid && !!subCampaign.error_name}
-          // helperText={subCampaign.error_name}
-          onChange={handleChange}
-          fullWidth
-          sx={{
-            "& .MuiFormLabel-root": { fontSize: 15 },
-            "& .MuiInputBase-input": { fontSize: 16 },
-          }}
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={subCampaign.status}
-              onChange={handleChange}
-              name="status"
-            />
-          }
-          label="Đang hoạt động"
-          sx={{ "& .MuiSvgIcon-root": { fontSize: 28 }, width: "30%" }}
-        />
-      </FormControl>
-    </FormGroup>
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={subCampaign.status}
+            onChange={handleChange}
+            name="status"
+          />
+        }
+        label="Đang hoạt động"
+        sx={{
+          "& .MuiSvgIcon-root": { fontSize: { xs: 20, md: 28 } },
+          "& .MuiTypography-root": { fontSize: { xs: 12, md: 14 } },
+          // width: "30%",
+          // minWidth: "100px",
+          // marginRight: 0,
+        }}
+      />
+    </FormControl>
   );
 };
 

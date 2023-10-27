@@ -1,6 +1,3 @@
-/**
- * interfaces.tsx
- */
 import {
   ADD_ADS,
   ADD_SUB_CAMPAIGN,
