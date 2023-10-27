@@ -1,70 +1,85 @@
-# React + TypeScript + Vite
-https://demo.awifi.vn/Requirement.
-Ứng viên thực hiện làm bài test dưới đây:
-- Ưu tiên sử dụng Material UI để xây dựng giao diện
-- Hạn chế tối đa sử dụng thư viện khác hoặc giải pháp từ bên thứ 3
-Viết 1 ứng dụng nhỏ bằng React
-Viết một ứng dụng bằng React sử dụng Typescript gồm 2 tab như sau:
-- Active tab tương ứng khi người dùng chọn [DONE]
-Tab thông tin:
-- Các trường: Tên chiến dịch, Mô tả (bắt buộc nhập trường Tên chiến dịch) [DONE]
-Tab Chiến dịch con:
-- Bao gồm một danh sách các chiến dịch con [DONE]
-- Mặc định active Chiến dịch con 1 được tạo sẵn [DONE]
-- Nút Add (+): [DONE]
-- Để thêm mới một Chiến dịch con vào danh sách [DONE]
-- Chiến dịch con mới mặc định chứa 1 quảng cáo [DONE]
-- Một Chiến dịch con bao gồm: [DONE]
-   - Thông tin chiến dịch con: Tên chiến dịch con, Trạng thái hoạt động (Bắt buộc nhập trường Tên chiến dịch con) [DONE]
-   - Danh sách các quảng cáo của chiến dịch con [DONE]
-   - Một quảng cáo bao gồm: [DONE]
-   - Thông tin quảng cáo: Tên quảng cáo, Số lượng (Bắt buộc nhập cả 2 trường, trường Số lượng phải lớn hơn 0) [DONE]
-- Nút Thêm (+): [DONE]
-   - Để thêm mới một quảng cáo vào danh sách [DONE]
-   - Danh sách quảng cáo của một chiến dịch con phải lớn hơn 0 [DONE]
-- Số lượng của chiến dịch con (số hiển thị ở dưới tên chiến dịch con trong demo) bằng tổng số lượng của tất cả các quảng cáo [DONE]
+# Campaign management application
 
-Validation có 2 trường hợp:
+The campaign management application is a small application written in React and using TypeScript. The application includes two tabs: Information tab and Sub-campaign tab.
 
-Trường hợp 1: Khi chưa click nút submit Không hiển thị cảnh báo lỗi [DONE]
+# Technology: React + TypeScript + Material UI (Do not use any third-party libraries or solutions)
 
-Trường hợp 2: Đã click vào nút submit Hiện cảnh báo lỗi cho tất cả các trường bắt buộc ở cả 2 Tab. Hiện cảnh báo lỗi cho tất cả các chiến dịch con (Chuyển tên chiến dịch con bị lỗi thành màu đỏ). [DONE]
+Github: https://github.com/Kira7dn/awing
+Live demo: https://github.com/Kira7dn/awing
+Requirement: https://demo.awifi.vn/Requirement.
 
-submit [DONE]
+## Installation
 
-- Toàn bộ thông tin trong hai tab hợp lệ (không có cảnh báo): Thành công [DONE]
+To install the application, you need to install Node.js and npm on your computer. Then, you can clone this repository and run the following commands:
 
-- Ngược lại: Vui lòng điền đúng và đầy đủ thông tin và thực hiện validation với các trường bắt buộc nhập [DONE]
+```bash
+npm install
+npm start
+```
 
-Dữ liệu chiến dịch
+After running the `npm start` command, the application will run on localhost.
 
-campaign: {
+## Usage
 
-information: {
+- The application consists of 2 tabs [Information] and [Sub-campaign]
+- When you open the application, the [Information] tab will be active by default.
 
-name: string
+  - In the [Information] tab, you can enter information about the campaign name and description.
+  - The [Campaign name] field is required.
 
-describe?: string
+- In the [Sub-campaign] tab, you will see a list of sub-campaigns.
 
-}
+  - By default, Sub-campaign 1 is created and active.
+  - You can add a new sub-campaign by clicking the Add (+) button.
+  - A sub-campaign includes information about the sub-campaign (Sub-campaign name and Active status) and a list of ads for the sub-campaign.
+  - By default, a sub-campaign contains one ad.
+  - Each ad includes information about the ad (Ad name and Quantity).
+  - The [Sub-campaign name] and [Quantity] fields are required.
 
-subCampaigns: [{
+- Add, edit, delete Ads:
 
-name: string
+  - You can add a new ad to the list by clicking the (+ Add) button.
+  - Remove ads from the list by selecting and clicking the [Delete] button.
+  - The ad list of a sub-campaign must be greater than 0.
 
-status: boolean
+- Validation function:
+  - Case 1: When the submit button is not clicked, no error warning is displayed.
+  - Case 2: After clicking the submit button, error warnings are displayed for all required fields in both tabs. Error warnings are also displayed for all sub-campaigns.
+  - If all information in both tabs is valid (no warnings), you can click the submit button to complete the process. Otherwise, you need to fill in the required information correctly and perform validation with the required fields.
 
-ads: [{
+## Technical explanation
+   - The application uses useContext and useReducer to create Global State as follows:
+      State = {
+         information: {
+            name: string,
+            describe?: string,
+            error?: string | null,
+         },
+         subCampaigns: {
+            id: number,
+            name: string,
+            status: boolean,
+            error_name?: string | null,
+            error_ads?: string | null,
+            ads: {
+               id: number,
+               name: string,
+               quantity: number,
+               error_name?: string | null,
+               error_quantity?: string | null,
+            }[],
+         }[],
+         status: {
+            isValid: boolean,
+            currentSub: number,
+         },
+      }
+   - Every time the user interacts and changes the input fields, the application will dispatch a corresponding action including "UPDATE_INFOMATION";"ADD_SUB_CAMPAIGN";"UPDATE_SUB_CAMPAIGN";"ADD_ADS";"UPDATE_ADS";"DELETE_ADS";"SET_IS_VALID";"SET_CURRENT_SUB" and change the state of the State, then the application will automatically re-render and update the user interface. At that time, the application will also check the data entered in the fields and update the corresponding error*** values.
+   - After the [Submit] button is clicked, the validation function will be activated and check all error*** data in the Global State. If the result is false, the isValid value in State.status will be updated. At that time, the application will alert the error and activate the error state in the corresponding input fields.
+   - After the user interacts and updates the input fields with appropriate values, the error state will be removed. At this point, the user can click the [Submit] button, and the application will alert the completion status.
 
-name: string
+## Author
 
-quantity: number
+The application was written by [Ducanh.le].
 
-}]
-
-}]
-
-}
-
-Ví dụ:
-Tham khảo ứng dụng được tạo sẵn ở menu: Demo
+```
