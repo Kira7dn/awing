@@ -3,8 +3,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Campaign from "./Campain/Campaign";
-import SubCampaign from "./SubCampaign/SubCampaigns";
+
+import Campaign from "./Information/Information";
+import SubCampaign from "./SubCampaigns/SubCampaigns";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -34,7 +35,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function CampaignTabs() {
+export default function MainTabs() {
   const [value, setValue] = React.useState(0);
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

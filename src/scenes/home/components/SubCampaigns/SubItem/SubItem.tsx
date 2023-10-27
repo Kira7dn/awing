@@ -1,10 +1,10 @@
-import AdvertiseList from "./AdvertiseList";
 import SubInfo from "./SubInfo";
+import AdvertiseList from "./Ads/AdsList";
 
-function SubItem() {  
+function SubItem() {
   return (
     <>
-      <SubInfo/>
+      <SubInfo />
       <AdvertiseList />
     </>
   );

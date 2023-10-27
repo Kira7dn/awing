@@ -1,9 +1,8 @@
 import { Box, Button, Card, CardActions } from "@mui/material";
-import BasicTabs from "./CampaignTabs";
-import { useStore } from "../../store/hook";
-import { SET_IS_VALID } from "../../store/action";
-// import { UPDATE_INFOMATION, UPDATE_SUB_CAMPAIGN } from "../../store/action";
-// import { Campaign } from "../../store/interface";
+
+import { useStore } from "@/store/hook";
+import { SET_IS_VALID } from "@/store/action";
+import MainTabs from "./components/MainTabs";
 
 function Home() {
   const { state, dispatch } = useStore();
@@ -49,7 +48,7 @@ function Home() {
           padding: "10px 20px",
         }}
       >
-        <BasicTabs />
+        <MainTabs />
         <CardActions sx={{ display: "flex", justifyContent: "center" }}>
           <Button
             size="large"

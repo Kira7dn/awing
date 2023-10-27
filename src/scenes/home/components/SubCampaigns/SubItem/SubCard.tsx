@@ -1,14 +1,15 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
-import { ISubCampaign } from "../../../store/interface";
 import { CheckCircle } from "@mui/icons-material";
-import { useStore } from "../../../store/hook";
+import { Box, Card, CardContent, Typography } from "@mui/material";
+
+import { useStore } from "@/store/hook";
+import { ISubCampaign } from "@/store/interface";
 
 type Props = {
   subCampaign: ISubCampaign;
   isSelected: boolean;
 };
 
-const SubCampaignCard = ({ subCampaign, isSelected }: Props) => {
+const SubCard = ({ subCampaign, isSelected }: Props) => {
   const { state } = useStore();
   const adsNumber = subCampaign.ads.reduce(
     (sum, ad) => sum + Number(ad.quantity),
@@ -49,7 +50,7 @@ const SubCampaignCard = ({ subCampaign, isSelected }: Props) => {
               fontWeight: "bold",
             }}
           >
-            {subCampaign.name}
+            {subCampaign.name !== "" ? subCampaign.name : "Chiến dịch con"}
           </Typography>
           <CheckCircle color={subCampaign.status ? "success" : "disabled"} />
         </Box>
@@ -61,4 +62,4 @@ const SubCampaignCard = ({ subCampaign, isSelected }: Props) => {
   );
 };
 
-export default SubCampaignCard;
+export default SubCard;

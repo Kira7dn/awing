@@ -21,7 +21,7 @@ Tab Chiến dịch con:
    - Thông tin quảng cáo: Tên quảng cáo, Số lượng (Bắt buộc nhập cả 2 trường, trường Số lượng phải lớn hơn 0) [DONE]
 - Nút Thêm (+): [DONE]
    - Để thêm mới một quảng cáo vào danh sách [DONE]
-   - Danh sách quảng cáo của một chiến dịch con phải lớn hơn 0 [NOT YET]
+   - Danh sách quảng cáo của một chiến dịch con phải lớn hơn 0 [DONE]
 - Số lượng của chiến dịch con (số hiển thị ở dưới tên chiến dịch con trong demo) bằng tổng số lượng của tất cả các quảng cáo [DONE]
 
 Validation có 2 trường hợp:

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -15,12 +16,12 @@ import {
   Typography,
 } from "@mui/material";
 import { AddCircleOutline, Delete } from "@mui/icons-material";
-import { useState } from "react";
-import { AdsRow } from "./AdsRow";
-import { useStore } from "../../../store/hook";
-import { UPDATE_SUB_CAMPAIGN } from "../../../store/action";
 
-function AdvertiseList() {
+import { AdsItem } from "./AdsItem";
+import { useStore } from "@/store/hook";
+import { UPDATE_SUB_CAMPAIGN } from "@/store/action";
+
+function AdsList() {
   const { state, dispatch } = useStore();
   const { subCampaigns, status } = state;
   const subCampaign = subCampaigns.filter((c) => c.id === status.currentSub)[0];
@@ -200,7 +201,7 @@ function AdvertiseList() {
                     key={row.name}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <AdsRow
+                    <AdsItem
                       row={row}
                       isItemSelected={isItemSelected}
                       handleCheck={handleCheck}
@@ -217,4 +218,4 @@ function AdvertiseList() {
   );
 }
 
-export default AdvertiseList;
+export default AdsList;

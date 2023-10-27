@@ -5,8 +5,9 @@ import {
   FormGroup,
   TextField,
 } from "@mui/material";
-import { useStore } from "../../../store/hook";
-import { UPDATE_SUB_CAMPAIGN } from "../../../store/action";
+
+import { useStore } from "@/store/hook";
+import { UPDATE_SUB_CAMPAIGN } from "@/store/action";
 
 const SubInfo = () => {
   const { state, dispatch } = useStore();

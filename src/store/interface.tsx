@@ -12,8 +12,8 @@ import {
   UPDATE_SUB_CAMPAIGN,
 } from "./action";
 
-export type Campaign = {
-  information: Information;
+export type ICampaign = {
+  information: IInformation;
   subCampaigns: ISubCampaign[];
   status: Status;
 };
@@ -21,7 +21,7 @@ export type Status = {
   isValid: boolean;
   currentSub: number;
 };
-export type Information = {
+export type IInformation = {
   name: string;
   describe?: string;
   error?: string | null;
@@ -82,7 +82,7 @@ export type SubCampaignActions = ISubAdd | ISubUpdate;
 
 export type InfoAction = {
   type: typeof UPDATE_INFOMATION;
-  payload: Information;
+  payload: IInformation;
 };
 
 export type ICampaignValidate = {

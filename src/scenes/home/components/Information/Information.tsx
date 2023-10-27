@@ -1,9 +1,10 @@
 import { FormControl } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useStore } from "../../../store/hook";
-import { UPDATE_INFOMATION } from "../../../store/action";
 
-function Campaign() {
+import { UPDATE_INFOMATION } from "@/store/action";
+import { useStore } from "@/store/hook";
+
+function Information() {
   const { state, dispatch } = useStore();
   const { name, describe } = state.information;
   return (
@@ -58,4 +59,4 @@ function Campaign() {
   );
 }
 
-export default Campaign;
+export default Information;

@@ -7,7 +7,7 @@ import {
 } from "./reducer";
 import Context from "./Context";
 import {
-  Campaign,
+  ICampaign,
   InfoAction,
   StatusAction,
   SubCampaignActions,
@@ -21,7 +21,7 @@ export const APP_STATE_NAME = "testing";
 
 function StoreProvider({ children }: ProviderProps) {
   const combinedReducers = (
-    { information, subCampaigns, status }: Campaign,
+    { information, subCampaigns, status }: ICampaign,
     action: InfoAction | SubCampaignActions | StatusAction
   ) => ({
     information: infoReducer(information, action),

@@ -1,5 +1,6 @@
 import { Checkbox, TableCell, TextField } from "@mui/material";
-import { useStore } from "../../../store/hook";
+
+import { useStore } from "@/store/hook";
 
 type Props = {
   row: {
@@ -11,7 +12,7 @@ type Props = {
   handleCheck: (_event: React.MouseEvent<unknown>, id: number) => void;
   handleChangeAds: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
-export function AdsRow({
+export function AdsItem({
   row,
   isItemSelected,
   handleCheck,

@@ -1,23 +1,20 @@
 import { APP_STATE_NAME } from "./Provider";
 import {
-  // ADD_ADS,
   ADD_SUB_CAMPAIGN,
   SET_CURRENT_SUB,
-  // DELETE_ADS,
   SET_IS_VALID,
-  // UPDATE_ADS,
   UPDATE_INFOMATION,
   UPDATE_SUB_CAMPAIGN,
 } from "./action";
 import {
-  Campaign,
-  Information,
+  ICampaign,
+  IInformation,
   StateActions,
   ISubCampaign,
   Status,
 } from "./interface";
 
-export const initialState: Campaign = JSON.parse(
+export const initialState: ICampaign = JSON.parse(
   localStorage.getItem(APP_STATE_NAME)!
 )
   ? JSON.parse(localStorage.getItem(APP_STATE_NAME)!)
@@ -25,6 +22,7 @@ export const initialState: Campaign = JSON.parse(
       information: {
         name: "",
         describe: "",
+        error: "Vui lòng điền thông tin.",
       },
       subCampaigns: [
         {
@@ -36,8 +34,12 @@ export const initialState: Campaign = JSON.parse(
               id: 1,
               name: "Quảng cáo 1",
               quantity: 0,
+              error_name: null,
+              error_quantity: "Vui lòng điền thông tin.",
             },
           ],
+          error_name: null,
+          error_ads: "Lỗi Quảng cáo",
         },
       ],
       status: {
@@ -58,51 +60,12 @@ export const subReducer = (subs: ISubCampaign[], action: StateActions) => {
         }
         return subCampaign;
       });
-    // case ADD_ADS:
-    //   return subs.map((subCampaign) => {
-    //     if (subCampaign.id === payload.subCampaignId) {
-    //       return {
-    //         ...subCampaign,
-    //         ads: [...subCampaign.ads, payload.ads],
-    //       };
-    //     }
-    //     return subCampaign;
-    //   });
-    // case UPDATE_ADS:
-    //   return subs.map((subCampaign) => {
-    //     if (subCampaign.id === payload.subCampaignId) {
-    //       return {
-    //         ...subCampaign,
-    //         ads: subCampaign.ads.map((ads) => {
-    //           if (ads.id === payload.ads.id) {
-    //             return {
-    //               ...ads,
-    //               name: payload.ads.name,
-    //               quantity: payload.ads.quantity,
-    //             };
-    //           }
-    //           return ads;
-    //         }),
-    //       };
-    //     }
-    //     return subCampaign;
-    //   });
-    // case DELETE_ADS:
-    //   return subs.map((subCampaign) => {
-    //     if (subCampaign.id === payload.subCampaignId) {
-    //       return {
-    //         ...subCampaign,
-    //         ads: subCampaign.ads.filter((ads) => ads.id !== payload.ads.id),
-    //       };
-    //     }
-    //     return subCampaign;
-    //   });
     default:
       return subs;
   }
 };
 
-export const infoReducer = (info: Information, action: StateActions) => {
+export const infoReducer = (info: IInformation, action: StateActions) => {
   const { type, payload } = action;
   switch (type) {
     case UPDATE_INFOMATION:

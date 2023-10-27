@@ -1,10 +1,11 @@
 import { NoteAdd } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";
-import SubCampaignCard from "./SubCampaignCard";
-import SubItem from "./SubItem";
-import { useStore } from "../../../store/hook";
-import { ADD_SUB_CAMPAIGN, SET_CURRENT_SUB } from "../../../store/action";
-import { tokens } from "../../../theme";
+
+import SubItem from "./SubItem/SubItem";
+import { tokens } from "@/theme";
+import { useStore } from "@/store/hook";
+import SubCampaignCard from "./SubItem/SubCard";
+import { ADD_SUB_CAMPAIGN, SET_CURRENT_SUB } from "@/store/action";
 
 const SubCampaigns = () => {
   const { state, dispatch } = useStore();
