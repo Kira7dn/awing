@@ -37,11 +37,6 @@ export function AdsItem({
           name="name"
           defaultValue={row.name}
           error={!state.status.isValid && row.name === ""}
-          // helperText={
-          //   !state.status.isValid &&
-          //   row.name === "" &&
-          //   "Vui lòng điền thông tin."
-          // }
           sx={{
             "& .MuiInputBase-input": { fontSize: 16 },
           }}
@@ -59,11 +54,6 @@ export function AdsItem({
           id={row.id.toString()}
           name="quantity"
           error={!state.status.isValid && row.quantity <= 0}
-          // helperText={
-          //   !state.status.isValid &&
-          //   row.quantity <= 0 &&
-          //   "Vui lòng điền số lượng."
-          // }
           value={row.quantity}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             handleChangeAds(event);

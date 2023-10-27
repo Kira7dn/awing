@@ -5,8 +5,10 @@ The campaign management application is a small application written in React and 
 # Technology: React + TypeScript + Material UI (Do not use any third-party libraries or solutions)
 
 Github: https://github.com/Kira7dn/awing
-Live demo: https://github.com/Kira7dn/awing
-Requirement: https://demo.awifi.vn/Requirement.
+
+Live demo: https://awing.vercel.app/
+
+Requirement: https://demo.awifi.vn/Requirement
 
 ## Installation
 
