@@ -21,6 +21,7 @@ const SubCampaigns = () => {
         quantity: 0,
       },
     ],
+    error_name: "Invalid",
   };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
